@@ -1,0 +1,11 @@
+.idea/
+.gradle
+build/
+.terraform
+out/
+version.txt
+.DS_Store
+**/bin/
+.classpath
+.settings
+
