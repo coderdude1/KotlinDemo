@@ -1,4 +1,4 @@
-package me.kotlin.basic.basicstart
+package me.kotlindemo
 
 import java.lang.NumberFormatException
 import kotlin.IllegalArgumentException
@@ -28,8 +28,12 @@ fun functions() {
     addAndPrint(14, 3)
     addAndPrintBody(17, 43) //cmd-click to show Unit is returned
     paramsWithDefaultValues() //use defaults
-    paramsWithDefaultValues("one", false, 14)//note four is using default, declard in order without names
-    paramsWithDefaultValues(two=false) //named params do not have to be in order
+    paramsWithDefaultValues(
+        "one",
+        false,
+        14
+    )//note four is using default, declard in order without names
+    paramsWithDefaultValues(two = false) //named params do not have to be in order
 }
 
 //functions are first class and do not need to be part of a class
@@ -102,7 +106,10 @@ fun whenWithSmartCast(a: Any) =
 fun conditionals() {
     println("\n>>>> Conditionals")
     println("  if as an expression, max value of 8 anc 2 is ${ifAsAnExpressionMaxValue(8, 2)}")
-    println("  if expression with blocks biggest of 13 and 53 is ${ifExpressionReturnsAValueWithBlocks(8, 2)}")
+    println("  if expression with blocks biggest of 13 and 53 is ${ifExpressionReturnsAValueWithBlocks(
+        8,
+        2
+    )}")
     println("  simple when as an expression ${simpleWhenAsExpression(2)}")
     println("  simple when as an expression out of range ${simpleWhenAsExpression(44)}")
     whenWithSmartCast("  smartCast with string 1")
@@ -124,7 +131,7 @@ fun progression() {
 }
 
 fun loops() {
-    println(">>>> Loops")
+    println("\n>>>> Loops")
     simpleForLoopOverRange()
     progression()
 }

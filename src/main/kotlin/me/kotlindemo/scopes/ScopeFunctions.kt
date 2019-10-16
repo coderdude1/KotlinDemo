@@ -1,4 +1,4 @@
-package me.kotlin.basic.basicstart.scopes
+package me.kotlindemo.scopes
 
 /**
  * Note that nothing is attached to a class.  properties and functions are first class objects, ie do not need to be part of

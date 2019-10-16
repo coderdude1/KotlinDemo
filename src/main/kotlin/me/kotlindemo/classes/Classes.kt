@@ -1,4 +1,4 @@
-package me.kotlin.basic.basicstart.classes
+package me.kotlindemo.classes
 
 /**
  * Data classes are great for simple POJOs or DTOs, ie stuff that are simple data containers, not biz logic.  You
@@ -22,7 +22,8 @@ fun main() {
 fun showDataClass() {
     val one = Person("one", "fname", "lname")
     val two = Person("one", "fname", "lname", 31)
-    val three = Person(id = "one", firstName = "fname", lastName = "lname")//note use of named params
+    val three =
+        Person(id = "one", firstName = "fname", lastName = "lname")//note use of named params
     println("equals one and three: ${one.equals(two)}")
     println("toString: $one")
     println("field ${one.age}")

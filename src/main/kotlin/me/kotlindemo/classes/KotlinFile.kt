@@ -1,4 +1,4 @@
-package me.kotlin.basic.basicstart.classes
+package me.kotlindemo.classes
 
 //note that this does not have to match the file path on disk
 

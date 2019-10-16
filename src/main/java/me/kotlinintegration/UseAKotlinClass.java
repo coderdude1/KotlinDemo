@@ -1,6 +1,6 @@
 package me.kotlinintegration;
 
-import me.kotlin.basic.basicstart.classes.Person;
+import me.kotlindemo.classes.Person;
 
 public class UseAKotlinClass {
     public static void main(String[] args) {
@@ -15,5 +15,10 @@ public class UseAKotlinClass {
         person.setFirstName("new first name"); //possible since firstName is a var
         System.out.println("  Kotlin dataclass Person toString after changing first name: " + person.toString());
         System.out.println("  Kotlin person explicit getter firstName: " + person.getFirstName());
+    }
+
+    private void useAnExtensionFunction() {
+        String blah = "blah";
+        blah.doo
     }
 }

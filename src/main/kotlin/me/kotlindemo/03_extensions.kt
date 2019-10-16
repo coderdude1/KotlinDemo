@@ -1,4 +1,4 @@
-package me.kotlin.basic.basicstart
+package me.kotlindemo
 
 /**
  * https://kotlinlang.org/docs/reference/extensions.html

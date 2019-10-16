@@ -1,4 +1,4 @@
-package me.kotlin.basic.basicstart
+package me.kotlindemo
 
 fun main() {
     iterateCollection()
