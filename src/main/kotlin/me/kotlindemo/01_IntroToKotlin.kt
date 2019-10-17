@@ -20,6 +20,8 @@ fun main() {
 
 /**
  *  FUNCTIONS
+ *  Functions in kotlin are 'first class objects', ie the can be assigned to variables, passed as params
+ *  to other functions, and returned as a result from higher order functions.
  */
 fun functions() {
     println("\n>>>>>  Some functions")
@@ -34,6 +36,7 @@ fun functions() {
         14
     )//note four is using default, declard in order without names
     paramsWithDefaultValues(two = false) //named params do not have to be in order
+    doSomethngWithLambdas()
 }
 
 //functions are first class and do not need to be part of a class
@@ -50,15 +53,35 @@ fun addAndPrint(a: Int, b: Int) = println("  fun with expression body: printing 
 
 
 fun addAndPrintBody(a: Int, b: Int) {
-    println("  fun with block body: printing from a body with no return: ${a + b}")
+    println("\n  fun with block body: printing from a body with no return: ${a + b}")
     return Unit //not required, can be ignored
 }
 
 fun paramsWithDefaultValues(one: String = "blah", two: Boolean = false, three: Int = 0,
                             fourNullable: String? = null){  //one, two, three are not nullable.  four is
-    println("  fun params with default values:  one: $one two:$two three: $three, fourNullable: $fourNullable")
+    println("\n  fun params with default values:  one: $one two:$two three: $three, fourNullable: $fourNullable")
 }
 
+/**
+ *  Lambdas
+ *  Similar to the way java does them for the most part
+ */
+//Lambda Expressions
+//return type is inferred, ie we don't explicitly say 'Int'
+val sumTypeInferred = {x: Int, y: Int -> x + y}
+val aResult = sumTypeInferred(3, 4)
+
+//Explicit type declaration
+// Format: (input params) -> return type = implementation
+val printNumber : (Int) -> Unit = {num -> println("    explioct type declared for lambda num: $num")}
+// the following doesn't work even tho I found lots of examples with it
+//val printNumberErrors : Int -> Unit = {num -> println("    explioct type declared for lambda num: $num")}
+
+fun doSomethngWithLambdas() {
+    println("\n>>>>>  do a couple of lambda things")
+    println("  invoke a lambdaExpression 3 + 4 = ${sumTypeInferred(3, 4)}")//need ${} since params, even tho it is a 'property'
+    printNumber(14)
+}
 /**
  *  VARIABLES
  */

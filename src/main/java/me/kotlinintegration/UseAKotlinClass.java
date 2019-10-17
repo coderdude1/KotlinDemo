@@ -19,6 +19,6 @@ public class UseAKotlinClass {
 
     private void useAnExtensionFunction() {
         String blah = "blah";
-        blah.doo
+//        blah.doo
     }
 }
