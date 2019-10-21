@@ -1,11 +1,13 @@
 package me.kotlinintegration;
 
 import me.kotlindemo.classes.Person;
+import me.kotlindemo._03_extensionsKt;
 
 public class UseAKotlinClass {
     public static void main(String[] args) {
         UseAKotlinClass useAKotlinClass = new UseAKotlinClass();
         useAKotlinClass.printADataClass();
+        useAKotlinClass.useAnExtensionFunction();
     }
 
     private void printADataClass() {
@@ -18,7 +20,8 @@ public class UseAKotlinClass {
     }
 
     private void useAnExtensionFunction() {
+        System.out.println("\n  Use a kotlin extension function from java");
         String blah = "blah";
-//        blah.doo
+        System.out.println("Using a kotlin extension function: " +_03_extensionsKt.doodify(blah));
     }
 }

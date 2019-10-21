@@ -174,11 +174,6 @@ fun simpleForLoopOverRange() {
     for (counter in 1..5) println("    Counter $counter")
 }
 
-fun progression() {
-    println("\n  loop with progression of 2 and a range")
-    for(counter in 1..10 step 2) println("    progression of 2: $counter")
-}
-
 /**
  * >>>>> Ranges
  */
@@ -196,6 +191,12 @@ fun doingStuffWithRanges() {
     print("\n\n    Counting downward\n      ")
     for (i in 10 downTo 1) { print("$i,") }
 
+    print("\n\n    Counting downward with a step\n      ")
+    for (i in 10 downTo 1 step 2) { print("$i,") }
+
+    print("\n\n    Counting downward differently doesn't work\n      ")
+    for (i in 10..1) { print("$i,") } //note the intellij highlighting asking to use a downTo
+
     print("\n\n    using range in a if statement\n      ")
     val somenum = 8
     if (somenum in 1..10) { println("$somenum is in the range") }
@@ -204,21 +205,43 @@ fun doingStuffWithRanges() {
 fun loops() {
     println("\n>>>> Loops")
     simpleForLoopOverRange()
-    progression()
     doingStuffWithRanges()
 }
 
 /**
  * >>>>  NULLABLE STUFF
+ * by default kotlin expects everything to be not null.  it won't let you assign stuff to be null
+ *
+ * if you want something nullable you have to expliclity indicate a property is nullable.  Kotlin will then
+ * require any code using it to declare nullability
  */
 
 fun nullableParams(one: String? = "blah", two: String? = null) { //? means this param is nullable,
     println("  nullableParamsToFun: fun with nulllable props one: $one two: $two")
 }
 
+//val blah: String = null //compile error since blah is defined by default as non-null
+fun nullableAssignments() {
+    var nullableString: String? = "blah"
+//    nullableString.length //compile error about nullableString can be null and you need to do stuff
+    var lengthOfString = nullableString?.length //use safecall to access length
+
+    //Elvis operator ?: used for null checks
+    val stringAllCaps = nullableString?.capitalize() ?: "not today"
+}
+
 fun safeCallOperator(one: String?) {
 //    println("one: ${one.toUpperCase()}") //can throw an NPE since one is nullable, compile time warning
     println("  safeCallOperator: one: ${one?.toUpperCase()}") //? is safecall, ie if not null then toUpperCase(), can be chained ie x?.y?.z?
+}
+
+/**
+ * Kotlin requires you to explicitly allow an NPE to be thrown, by default it forces you to deal with it
+ * using the safecall/elvis (or let/apply blocks) which do not throw an NPE
+ */
+fun allowNPE(nulledString: String? = null) {
+//    nulledString?.length ?: throw java.lang.NullPointerException() //same as following line
+    nulledString!!.length //throw the npe same as previous line
 }
 
 fun nullableStuff() {
@@ -230,10 +253,6 @@ fun nullableStuff() {
     } catch (npe: NullPointerException) { //note the order
         println("Caught an NPE")
     }
-}
-
-fun allowNPE(nulledString: String? = null) {
-    nulledString!!.length //throw the npe
 }
 
 /**
