@@ -15,6 +15,8 @@ package me.kotlindemo.classes
  */
 data class Person(val id: String, var firstName: String, val lastName: String, val age: Int = 31) //note age has default value, makes it optional in constructor
 
+data class Beer(val brewer: String, val name: String, val abv: Double, val ibu: Int, val style: String)
+
 fun main() {
     showDataClass()
 }

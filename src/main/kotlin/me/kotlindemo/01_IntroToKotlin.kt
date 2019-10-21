@@ -1,5 +1,6 @@
 package me.kotlindemo
 
+import me.kotlindemo.classes.Person
 import java.lang.NumberFormatException
 import kotlin.IllegalArgumentException
 
@@ -21,7 +22,10 @@ fun main() {
 /**
  *  FUNCTIONS
  *  Functions in kotlin are 'first class objects', ie the can be assigned to variables, passed as params
- *  to other functions, and returned as a result from higher order functions.
+ *  to other functions, and returned as a result from higher order functions.  They do not need to be defined
+ *  in a class scope.
+ *
+ *  expression body vs
  */
 fun functions() {
     println("\n>>>>>  Some functions")
@@ -40,7 +44,7 @@ fun functions() {
 }
 
 //functions are first class and do not need to be part of a class
-//expression body syntax, return type is inferred.  single line only (no {})
+//this is expression body syntax, return type is inferred.  single line only (no {})
 fun add(a: Int, b: Int) = a + b
 
 //return type is required when using {}, multiline
@@ -51,28 +55,27 @@ fun addWithBody(a: Int, b: Int): Int {
 //no return type, //implicitly returns Unit
 fun addAndPrint(a: Int, b: Int) = println("  fun with expression body: printing sum: ${a + b}")
 
-
+//return type not needing to be specified, so it's implicit Unit
 fun addAndPrintBody(a: Int, b: Int) {
     println("\n  fun with block body: printing from a body with no return: ${a + b}")
     return Unit //not required, can be ignored
 }
 
 fun paramsWithDefaultValues(one: String = "blah", two: Boolean = false, three: Int = 0,
-                            fourNullable: String? = null){  //one, two, three are not nullable.  four is
+                            fourNullable: String? = null) {  //one, two, three are not nullable.  four is
     println("\n  fun params with default values:  one: $one two:$two three: $three, fourNullable: $fourNullable")
 }
 
 /**
  *  Lambdas
- *  Similar to the way java does them for the most part
+ *  Similar to the way java does them for the most part, with a bit less verbage
  */
-//Lambda Expressions
 //return type is inferred, ie we don't explicitly say 'Int'
 val sumTypeInferred = {x: Int, y: Int -> x + y}
 val aResult = sumTypeInferred(3, 4)
 
 //Explicit type declaration
-// Format: (input params) -> return type = implementation
+// Format: (input params) -> return type = {implementation}
 val printNumber : (Int) -> Unit = {num -> println("    explioct type declared for lambda num: $num")}
 // the following doesn't work even tho I found lots of examples with it
 //val printNumberErrors : Int -> Unit = {num -> println("    explioct type declared for lambda num: $num")}
@@ -82,16 +85,27 @@ fun doSomethngWithLambdas() {
     println("  invoke a lambdaExpression 3 + 4 = ${sumTypeInferred(3, 4)}")//need ${} since params, even tho it is a 'property'
     printNumber(14)
 }
+
 /**
  *  VARIABLES
+ *      types do not need to be specified, they can be determined at time of assignment.  You can explicitly define types tho
+ *      once a type has been set, it can't be chanved, ie a val/var set to a string cannot be assigned to an int
+ *      everything is an object, and properties are references
+ *
+ *      using 'val' means once assigned a value reference, it cannot change (immutable)
+ *      using 'var' means it is a mutable reference
  */
 fun someVariableStuff() {
     println("\n>>>>> Variables")
+
     val implicitInt = 32 //type is implicit Int, val means the reference can only be set once
 //    implicitInt = 33 //compile time fail uncomment to show
 //    implicitInt = "string" //compile time reassign val error AND type mismatch error
-    var varInt = implicitInt //valid, var can have it's reference changed
+    var varInt = implicitInt //var has mutable reference, but once assigned a type it can't change
     println("  varInt = $varInt")
+//    varInt = "blah" //type mismatch, once a var has a type assigned it can't change
+    varInt = implicitInt * 2 //var has mutable reference
+    println("  after changing reference varInt = $varInt")
     println("  varInt with ++ = ${++varInt}") //need {} to get ++ to work, ie an expression
     println("  varInt after increment = $varInt")
 }
@@ -118,12 +132,23 @@ fun simpleWhenAsExpression(a: Int) =
         else -> "  range: a is out of range $a"
     }
 
-//implicitly returns Unit
+/**
+ * implicitly returns Unit
+ * no need for casting after figuring type, ie no if(instanceof String) {String x - (String)obj
+ */
 fun whenWithSmartCast(a: Any) =
     when(a) {
         is String -> println("  smartcast: got a string: $a") //in block we don't have to do typcast, its automagic
         else -> println("  smartcast: not a string $a")
     }
+
+fun someFunWithEquals() {
+    println("  Showing equals")
+    val personOne = Person("blah", "Johnny", "Walker")
+    val personTwo = Person("blah", "Johnny", "Walker")
+    println("    using == in place of .equals structural equality: ${personOne == personTwo}")
+    println("    using === in place of .equals refernentioal equality: ${personOne === personTwo}")
+}
 
 //implicitly returns Unit
 fun conditionals() {
@@ -137,6 +162,7 @@ fun conditionals() {
     println("  simple when as an expression out of range ${simpleWhenAsExpression(44)}")
     whenWithSmartCast("  smartCast with string 1")
     whenWithSmartCast(1)
+    someFunWithEquals()
 }
 
 /**
@@ -153,10 +179,33 @@ fun progression() {
     for(counter in 1..10 step 2) println("    progression of 2: $counter")
 }
 
+/**
+ * >>>>> Ranges
+ */
+fun doingStuffWithRanges() {
+    println("\n>>>>  stuff with ranges")
+    print("    typical for loop\n      ")
+    for (i in 1..20) { print("$i,") }
+
+    print("\n  using until for loop\n      ")
+    for (i in 0 until 20) { print("$i,") }
+
+    print("\n\n  using a progression of 2 for loop\n      ")
+    for (i in 2..10 step 2) { print("$i,") }//progression of 2
+
+    print("\n\n    Counting downward\n      ")
+    for (i in 10 downTo 1) { print("$i,") }
+
+    print("\n\n    using range in a if statement\n      ")
+    val somenum = 8
+    if (somenum in 1..10) { println("$somenum is in the range") }
+}
+
 fun loops() {
     println("\n>>>> Loops")
     simpleForLoopOverRange()
     progression()
+    doingStuffWithRanges()
 }
 
 /**
