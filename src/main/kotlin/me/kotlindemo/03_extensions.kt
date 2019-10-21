@@ -17,10 +17,12 @@ fun main() {
 val randy = "Randy!"
 
 /**
+ * Extension functions allow us to add features to 3rd party stuff (types)
  * Receiver type is the class getting extended, ie 'String' in this example
- * this fun returns a type 'Sring'
+ * this fun returns a type 'String'
  * this will show up in autocomplete
- * ingore intellij warning for now about String. receiver param not used
+ * ignore intellij warning for now about String. receiver param not used
+ * can be invoked from java but kinda messy
  */
 fun String.doodify() : String = "doood!"  //adds the fun 'doodify' to all string objects in this module, can use block body too
 
