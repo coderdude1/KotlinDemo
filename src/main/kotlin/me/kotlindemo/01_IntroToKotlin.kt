@@ -5,14 +5,16 @@ import java.lang.NumberFormatException
 import kotlin.IllegalArgumentException
 
 /** note that package name  does not have to match path on disk
- * default scope is public, other scopes are internal (module), private, protected
+ * default scope is public, other scopes are internal (module), private, protected.
+ * A module is everything that is in a single compile unit
+ *
  * TODO
  * 1.  Destructuring https://kotlinlang.org/docs/reference/multi-declarations.html
 */
 
 fun main() {
-    functions()
     someVariableStuff()
+    functions()
     conditionals()
     loops()
     nullableStuff()
@@ -25,7 +27,8 @@ fun main() {
  *  to other functions, and returned as a result from higher order functions.  They do not need to be defined
  *  in a class scope.
  *
- *  expression body vs
+ *  if a function has a 'void' return type, in kotlin use 'Unit'.  The compiler will implicit return 'Unit' if not declared
+ *  expression body vs block body
  */
 fun functions() {
     println("\n>>>>>  Some functions")
@@ -88,23 +91,36 @@ fun doSomethngWithLambdas() {
 
 /**
  *  VARIABLES
- *      types do not need to be specified, they can be determined at time of assignment.  You can explicitly define types tho
- *      once a type has been set, it can't be chanved, ie a val/var set to a string cannot be assigned to an int
- *      everything is an object, and properties are references
+ *  https://kotlinlang.org/docs/reference/basic-types.html
  *
- *      using 'val' means once assigned a value reference, it cannot change (immutable)
- *      using 'var' means it is a mutable reference
+ *      For the most part from a dev view, everything is an object.  At runtime things may have a primitive value, but we always
+ *      have access to member functions to these types (ie int is always Int)
+ *      variables are a reference
+ *      you can have immutable references (val) and mutable references (var)
+ *      Types do not need to be specified, they can be determined at time of assignment, ie inferred.
+ *      You can explicitly declare types if you want.
+ *      Once a type has been set, it can't be changed, ie a var set to a string cannot be assigned to an int
+ *
+ *      The use of val is encouraged.  Immutability is default for a lot of things
+ *
+ *      Numbers are Byte (8bits), Short (16), Int (32) and Long(64).  all are signed
+ *      Floating point numbers are Float (32) and Double(64).  Decimals are by default Double.  If you need larger precision
+ *      or money (or scienece stuff) use BigDecimal
+ *      Others are String,, Char (16) and Boolean (8)
  */
 fun someVariableStuff() {
     println("\n>>>>> Variables")
 
-    val implicitInt = 32 //type is implicit Int, val means the reference can only be set once
+    val implicitInt = 32_000 //type is implicit Int, val means the reference can only be set once, not underscore allowed to make more readable
+    val numWitDecimals = 32.0132 //type is Double
+    val floatWithDecimal = 32.013f //trailing 'f' makes it a Float
+    println("  some decimals ${numWitDecimals.javaClass}=$numWitDecimals and ${floatWithDecimal.javaClass} is $floatWithDecimal")
 //    implicitInt = 33 //compile time fail uncomment to show
 //    implicitInt = "string" //compile time reassign val error AND type mismatch error
     var varInt = implicitInt //var has mutable reference, but once assigned a type it can't change
-    println("  varInt = $varInt")
+    println("  varInt = $varInt values equal: ${varInt == implicitInt}") //string interpolation, property so no {}, note no .equals
 //    varInt = "blah" //type mismatch, once a var has a type assigned it can't change
-    varInt = implicitInt * 2 //var has mutable reference
+    varInt = implicitInt * 2 //var has mutable reference, so we can reassign it
     println("  after changing reference varInt = $varInt")
     println("  varInt with ++ = ${++varInt}") //need {} to get ++ to work, ie an expression
     println("  varInt after increment = $varInt")
@@ -119,7 +135,7 @@ fun ifAsAnExpressionMaxValue(a: Int, b: Int) = if (a > b) a else b
 fun ifExpressionReturnsAValueWithBlocks(a: Int, b: Int): Int =
     if (a > b) { //if this was a block body, return requred here on the if since if is an expression.  return is required for block functions vs expression body
         println("  if: a is bigger $a > $b")
-        a //return a
+        a //return a, 'return' not required since this is an expression body syntax, ie no {} for the block
     } else {
         println("  if: b is bigger $b > $a")
         b //return b
@@ -146,7 +162,7 @@ fun someFunWithEquals() {
     println("  Showing equals")
     val personOne = Person("blah", "Johnny", "Walker")
     val personTwo = Person("blah", "Johnny", "Walker")
-    println("    using == in place of .equals structural equality: ${personOne == personTwo}")
+    println("    using == in place of .equals structural equality: ${personOne == personTwo}")  //== in place of .equals
     println("    using === in place of .equals refernentioal equality: ${personOne === personTwo}")
 }
 
