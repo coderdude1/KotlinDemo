@@ -12,6 +12,9 @@ import kotlin.IllegalArgumentException
  * 1.  Destructuring https://kotlinlang.org/docs/reference/multi-declarations.html
 */
 
+/**
+ * this looks familiar!  intellij autocomlentes if you start typing 'main'
+ */
 fun main() {
     someVariableStuff()
     functions()
@@ -68,6 +71,13 @@ fun paramsWithDefaultValues(one: String = "blah", two: Boolean = false, three: I
                             fourNullable: String? = null) {  //one, two, three are not nullable.  four is
     println("\n  fun params with default values:  one: $one two:$two three: $three, fourNullable: $fourNullable")
 }
+
+/**
+ * Function params are val (immutable).  Compile time errors result if you 'var' it
+ */
+//fun paramsAreDefaultVal(inputString: String. var anotherInputString: String) { //compile error on var, 'expecting type name'
+////    inputString = "blah" //val cannot be reassigned compile error
+//}
 
 /**
  *  Lambdas
@@ -162,8 +172,8 @@ fun someFunWithEquals() {
     println("  Showing equals")
     val personOne = Person("blah", "Johnny", "Walker")
     val personTwo = Person("blah", "Johnny", "Walker")
-    println("    using == in place of .equals structural equality: ${personOne == personTwo}")  //== in place of .equals
-    println("    using === in place of .equals refernentioal equality: ${personOne === personTwo}")
+    println("    using == is same as .equals testing structural equality: ${personOne == personTwo}")  //== in place of .equals
+    println("    using === tests for referential equality: ${personOne === personTwo}")
 }
 
 //implicitly returns Unit

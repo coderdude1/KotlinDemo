@@ -65,7 +65,7 @@ fun someMapStuff() {
     println("  all Keys: ${mapOfNumbers.keys}")
     println("  all values: ${mapOfNumbers.values}")
     println("  destructuring a map")
-    for((key, value) in mapOfNumbers) {
+    for((key, value) in mapOfNumbers) {  //destructuring
         println("    key: $key value: $value")
     }
 }
