@@ -50,6 +50,9 @@ Visual Studio has good support,  I assume it wraps around the CLI stuff.
 gherkin (cucumber) [data driven test](https://github.com/spekframework/spek/issues/521).  [Baeldog article on spek](https://www.baeldung.com/kotlin-spek)
 * [KotlinLang list of some popular frameworks and libs](https://kotlinlang.org/docs/resources.html)
 
+## Functional patterns and such
+* [Arrow functional companion to the kotlin stardard lib](https://arrow-kt.io/) has several topics including patterns, typeclasses, etc
+
 ##Some usage stats
 * [Jetbrains tracking usages](https://www.jetbrains.com/lp/devecosystem-2019/kotlin/).  Note non-android dev is quite high.
 Breakdown on popular tools, and frameworks for kotlin.  Includes a chart showing a breakdown of what platform kotlin is used to develop software for.  I took
