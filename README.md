@@ -45,10 +45,10 @@ Intellij has native support for Kotlin.  Eclipse has a plugin that I've read is 
 Visual Studio has good support,  I assume it wraps around the CLI stuff. 
 
 ## Native kotlin libs and frameworks
-* [Ktor - Async webserver]( https://ktor.io/ https://www.raywenderlich.com/2885892-server-side-kotlin-with-ktor)
+* [Ktor - Async webserver]( https://ktor.io/) and [another guide](https://www.raywenderlich.com/2885892-server-side-kotlin-with-ktor)
 * [Spek - testing framework](https://github.com/spekframework/spek) supports specification style (Jasmine/RSpec) and 
 gherkin (cucumber) [data driven test](https://github.com/spekframework/spek/issues/521).  [Baeldog article on spek](https://www.baeldung.com/kotlin-spek)
-* [KotlinLang list of some popular frameworks and libs](https://kotlinlang.org/docs/resources.html
+* [KotlinLang list of some popular frameworks and libs](https://kotlinlang.org/docs/resources.html)
 
 ##Some usage stats
 * [Jetbrains tracking usages](https://www.jetbrains.com/lp/devecosystem-2019/kotlin/).  Note non-android dev is quite high.
