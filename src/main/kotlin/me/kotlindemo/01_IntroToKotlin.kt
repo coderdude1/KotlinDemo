@@ -142,16 +142,17 @@ fun someVariableStuff() {
 //IF as an expression so no ternary in kotlin (not same as elvis) ie if statements are expressions and return a value
 fun ifAsAnExpressionMaxValue(a: Int, b: Int) = if (a > b) a else b
 
-fun ifExpressionReturnsAValueWithBlocks(a: Int, b: Int): Int =
-    if (a > b) { //if this was a block body, return requred here on the if since if is an expression.  return is required for block functions vs expression body
+fun ifExpressionReturnsAValueWithBlocks(a: Int, b: Int): Int { //block body
+    return if (a > b) { //if is an expression thus returns the value
         println("  if: a is bigger $a > $b")
         a //return a, 'return' not required since this is an expression body syntax, ie no {} for the block
     } else {
         println("  if: b is bigger $b > $a")
         b //return b
     }
+}
 
-//when replaces switch.  when can be used as an expression or a statement, excuted sequentially returns a string
+//when replaces switch.  when can be used as an expression or a statement, executed sequentially returns a string
 fun simpleWhenAsExpression(a: Int) =
     when(a) {
         in 0..5 -> "  range: a in 0..5 range: $a"
@@ -164,7 +165,7 @@ fun simpleWhenAsExpression(a: Int) =
  */
 fun whenWithSmartCast(a: Any) =
     when(a) {
-        is String -> println("  smartcast: got a string: $a") //in block we don't have to do typcast, its automagic
+        is String -> println("  smartcast: got a string: $a") //in block we don't have to do typecast, its automagic
         else -> println("  smartcast: not a string $a")
     }
 
